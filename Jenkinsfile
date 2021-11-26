@@ -3,24 +3,22 @@ def gv
 pipeline {
     agent any
     stages {
-       
-        stage("TESTING  ") {
-          when {
-            expression{
-              BRANCH_NAME=='dev'
-            }
-          }
+        
+         stage("build app ") {
             steps {
                 script {
-                    echo "TESTING IN $BRANCH_NAME "
-                 
+                    sh 'npm install'
+                   
                 }
             }
         }
+       
+        
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
+                    sh 'docker-compose build '
+                    sh 'docker-compose up -d '
                    
                 }
             }
